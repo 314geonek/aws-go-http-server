@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src=
+    "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+        </script>
+            <script>
+        var mytimezone;       
+        $.getJSON('http://ip-api.com/json', function(data) {
+            console.log(JSON.stringify(data, null, 2));
+            $("#ip").html(data.query);
+            $("#Timezone").html(data.timezone);
+            })
+    </script>
+    <script>
+        function displayTime(){
+        let options = {
+                timeZone: document.getElementById("Timezone").innerText,
+                hour: 'numeric',
+                minute: 'numeric',
+                second: 'numeric',
+                day: 'numeric',
+                month: 'numeric',
+                year: 'numeric',
+              }
+                var myTime = new Intl.DateTimeFormat([], options);        
+                document.getElementById("d1").innerHTML =  myTime.format(new Date());
+          }
+                
+            setInterval(function() {displayTime(); }, 500); 
+        </script>
+</head>
+<body>
+    ip: <p id="ip"></p> 
+    Timezone: <p id="Timezone"></p>
+    Twój czas: <p id="d1"></p>
+</body>
+</html>
